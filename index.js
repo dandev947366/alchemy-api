@@ -1,6 +1,6 @@
 import { Network, Alchemy } from "alchemy-sdk";
 import dotenv from "dotenv";
-
+import BigNumber from 'bignumber.js';
 dotenv.config();
 const { ALCHEMY_API_KEY } = process.env;
 
@@ -71,6 +71,7 @@ const getTransactionCount = async () => {
 
 // getTransactionCount()
 
+//ANCHOR - CHECK IF IT IS CONTRACT ADDRESS
 const checkContractAddress = async (address) => {
     try {
       const result = await alchemy.core.isContractAddress(address);
@@ -86,3 +87,28 @@ const checkContractAddress = async (address) => {
 // checkContractAddress(VitalikAddress)
 // checkContractAddress('0x497a9A79e82e6fC0FF10a16f6F75e6fcd5aE65a8')
 
+const getTokens = async () => {
+    //Define the owner address or name
+    const ownerAddress = "vitalik.eth"
+    
+    //The response returns the tokens the address owns and relevant metadata.
+    let response = await alchemy.core.getTokensForOwner(ownerAddress)
+  
+    response.tokens.forEach(item => {
+    
+        // Access properties of each item
+        const name = item.name;
+        const symbol = item.symbol;
+        const balance = item.balance.toLocaleString('en-US', {
+            maximumFractionDigits: 2,
+            useGrouping: true,
+          });;
+ 
+        // Log or process each item as needed
+        console.log(`${symbol} (${name}): ${balance}`);
+        console.log('-----')
+      });
+  };
+  
+  
+  getTokens()
