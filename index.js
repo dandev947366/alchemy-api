@@ -23,7 +23,7 @@ async function getBlockNumber() {
   }
 }
 
-getBlockNumber();
+// getBlockNumber();
 
 //ANCHOR - GET TOKEN BALANCE
 async function getTokenBalances(address) {
@@ -48,13 +48,13 @@ async function getMetadata(tokenContractAddress) {
   }
 }
 
-getMetadata(usdcContractAddress)
-  .then((metadata) => {
-    console.log("Token metadata:", metadata);
-  })
-  .catch((error) => {
-    console.error("Failed to get token metadata:", error);
-  });
+// getMetadata(usdcContractAddress)
+//   .then((metadata) => {
+//     console.log("Token metadata:", metadata);
+//   })
+//   .catch((error) => {
+//     console.error("Failed to get token metadata:", error);
+//   });
   
 //ANCHOR - GET TRANSACTIONCOUNT
 const VitalikAddress = "vitalik.eth";
@@ -69,6 +69,20 @@ const getTransactionCount = async () => {
   }
 };
 
-getTransactionCount()
-  .then((response) => {})
-  .catch((error) => {});
+// getTransactionCount()
+
+const checkContractAddress = async (address) => {
+    try {
+      const result = await alchemy.core.isContractAddress(address);
+      console.log(`Address ${address} is${result ? '' : ' not'} a contract address.`);
+      return result;
+    } catch (error) {
+      console.error('Error checking contract address:', error);
+      throw error; 
+      
+    }
+  };
+
+// checkContractAddress(VitalikAddress)
+// checkContractAddress('0x497a9A79e82e6fC0FF10a16f6F75e6fcd5aE65a8')
+
