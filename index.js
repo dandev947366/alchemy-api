@@ -87,6 +87,7 @@ const checkContractAddress = async (address) => {
 // checkContractAddress(VitalikAddress)
 // checkContractAddress('0x497a9A79e82e6fC0FF10a16f6F75e6fcd5aE65a8')
 
+//ANCHOR - GET TOKEN BY OWNER
 const getTokens = async () => {
     //Define the owner address or name
     const ownerAddress = "vitalik.eth"
@@ -110,5 +111,5 @@ const getTokens = async () => {
       });
   };
   
-  
-  getTokens()
+//   getTokens()
+
