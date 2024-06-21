@@ -1,4 +1,4 @@
-import { Network, Alchemy } from "alchemy-sdk";
+import { Network, Alchemy, Utils } from "alchemy-sdk";
 import dotenv from "dotenv";
 import BigNumber from 'bignumber.js';
 dotenv.config();
@@ -113,3 +113,20 @@ const getTokens = async () => {
   
 //   getTokens()
 
+//ANCHOR - GET GAS PRICE
+const getGasPrice = async () => {
+  try {
+    // Call the method
+    let response = await alchemy.core.getGasPrice();
+
+    // Convert the response to a BigNumber
+    let gasPrice = new BigNumber(response.toString());
+    let newGasPrice=Utils.formatUnits(gasPrice.toString(), "ether")
+    console.log(newGasPrice); 
+    console.log(gasPrice.toString()); 
+  } catch (error) {
+    console.error('Error fetching gas price:', error);
+  }
+};
+
+getGasPrice()
